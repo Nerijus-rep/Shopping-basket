@@ -1,0 +1,67 @@
+{
+    "items": [
+        {
+            "id": "01",
+            "image": "images/delnine1.jpg",
+            "title": "Delninė",
+            "description": "Delninė- mini rankinė!  Priedai: užtrauktukas, nusegamas rankų darbo dirželis, rankų darbo papuošaliukas.",
+            "price": "28"
+        },
+        {
+            "id": "02",
+            "image": "images/delnine2.jpg",
+            "title": "Delninė",
+            "description": "Delninė- mini rankinė!  Priedai: užtrauktukas, nusegamas rankų darbo dirželis, rankų darbo papuošaliukas.",
+            "price": "32"
+        },
+        {
+            "id": "03",
+            "image": "images/delnine3.jpg",
+            "title": "Delninė",
+            "description": "Delninė- mini rankinė!  Priedai: užtrauktukas, nusegamas rankų darbo dirželis, rankų darbo papuošaliukas.",
+            "price": "26"
+        },
+        {
+            "id": "04",
+            "image": "images/t1.jpg",
+            "title": "Rankinė",
+            "description": "Patogi rankinė trumpomis rankenomis",
+            "price": "42"
+        },
+        {
+            "id": "05",
+            "image": "images/noimage.jpg",
+            "title": "Rankinė",
+            "description": "Patogi rankinė ilgomis rankenomis",
+            "price": "48"
+        },
+        {
+            "id": "06",
+            "image": "images/t3.jpg",
+            "title": "Rankinė",
+            "description": "Šlapio asfalto spalva. Pakietintu dugneliu.",
+            "price": "52"
+        },
+        {
+            "id": "07",
+            "image": "images/d1.jpg",
+            "title": "Daiktakrepšis",
+            "description": "Daiktadežė – transformeris! Vienas didžiausių nertų krepšelių privalumų, kad jie gali transformuotis į įvairius dydžius. Jiems vietos namuose atsiras visuomet, šaunu tai, kad kiekvieną kartą galima turėti vis naują krepšelio variantą.",
+            "price": "93"
+        },
+        {
+            "id": "08",
+            "image": "images/d2.jpg",
+            "title": "Daiktakrepšis",
+            "description": "Šampaninis stačiakampis krepšelis.",
+            "price": "71"
+        },
+        {
+            "id": "09",
+            "image": "images/d3.jpg",
+            "title": "Daiktakrepšis",
+            "description": "Gilus daiktakrepšis. Gali būti naudojamas įvairioms paskirtims, malkoms laikyti, žaislams sudėti ir pan.",
+            "price": "96"
+        }
+    ]
+}

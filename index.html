@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Shopping basket</title>
+</head>
+
+<body>
+
+
+    <div class="container panel panel-primary">
+        <div class="row ">
+            <div class="col-md-12 ">
+                
+                <!--Navigation bar-->
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <form class="navbar-form navbar-default" role="search">
+
+                            <!--buttons for style change-->
+
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" id="style_description"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></button>
+                            </div>
+
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" id="style_foto"><span class="glyphicon glyphicon-th-large" aria-hidden="true "></span></button>
+                            </div>
+
+                            <!--Basket-->
+
+                            <span class="pull-right"><button class="btn btn-primary dropdown-toggle" type="button" id="menu"  data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" id="button_text"></span>
+                            <span class="badge"></span>
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+                                <li class="dropdown-header">Prekių ęsančių krepšelyje sąrašas:</li>
+                                <li role="presentation" class="divider"></li>
+                                <li class="dropdown-header"><span class="itemlist" href="#"></span></li>
+                                <li role="presentation" class="divider"></li>
+                                <li class="dropdown-header" id="itemsum"></li>
+                            </ul>
+                            </span>
+                        </form>
+                    </div>
+                </nav>
+
+
+                <!--Style with description-->
+
+                <table class="table table-hover" id="description">
+                    <thead class="thead_color">
+                        <tr>
+                            <th>Pavadinimas</th>
+                            <th class="text-center">Aprašymas</th>
+                            <th>Kaina</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="list_description">
+                    </tbody>
+                </table>
+
+
+
+                <!--Style with picture-->
+
+                <table class="table table-hover" id="add_picture">
+                    <div class="container">
+                        <thead class="thead_color">
+                            <tr>
+                                <th>Foto</th>
+                                <th class="text-center">Pavadinimas</th>
+                                <th class="text-center">Kaina</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="list_picture">
+                        </tbody>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
