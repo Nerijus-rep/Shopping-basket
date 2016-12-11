@@ -1,34 +1,18 @@
 $(document).ready(function () {
-
     $('#add_picture').hide();
 
-    var get_item = localStorage.getItem("item");
-    var products_sum = localStorage.getItem("price");
-    var item_amount_result = localStorage.getItem("amount");
+    var itemQuantityResult = localStorage.getItem("quantity");
+    var getItem = localStorage.getItem("item");
+    var productsSum = localStorage.getItem("price");
 
-    if (localStorage.getItem("price") === null || localStorage.getItem("price") == 0) {
+    Basket();
+    itemsQuantity();
+
+    if (localStorage.getItem("quantity") == null) {
         var sum = 0;
-        $("#button_text").text(" Prekių krepšelis yra tuščias ");
-        $(".badge, .caret").hide();
-
-    } else if (localStorage.getItem("amount") == 1) {
-        $("#button_text").text(" Prekių yra ");
-        $(".badge, .caret").show();
-
-        $('#itemsum').text('Viso už prekes: ' + products_sum + " €");
-        $('.itemlist').html(get_item);
-        $('.badge').text(item_amount_result + " Vienetas");
-        var item_sum = parseInt(products_sum);
-        var sum = item_sum;
     } else {
-        $("#button_text").text(" Prekių yra ");
-        $(".badge, .caret").show();
-
-        $('#itemsum').text('Viso už prekes: ' + products_sum + " €");
-        $('.itemlist').html(get_item);
-        $('.badge').text(item_amount_result + " Vienetai");
-        var item_sum = parseInt(products_sum);
-        var sum = item_sum;
+        var itemSum = parseInt(productsSum);
+        var sum = itemSum;
     };
 
     /**************************************** Get result from Json ***************************************************/
@@ -63,78 +47,49 @@ $(document).ready(function () {
     /**************************************** Add products to basket **************************************************/
 
     $(document).on("click", ".add", function () {
-        var producttitle = $(this).closest("tr").find(".title").text();
-        var productprice = $(this).closest("tr").find(".price").text();
+        var productTitle = $(this).closest("tr").find(".title").text();
+        var productPrice = $(this).closest("tr").find(".price").text();
 
-        var productpriceresult = parseInt(productprice);
-        sum += productpriceresult;
+        var productPriceResult = parseInt(productPrice);
+        sum += productPriceResult;
+
         localStorage.setItem("price", sum);
-        var products_sum = localStorage.getItem("price");
+        var productsSum = localStorage.getItem("price");
 
-        $('.itemlist').append('<div class="row">' + '<div class="col-md-6">' + producttitle + '</div>' +
-            '<div class="col-md-2">' + '<span class="price">' + productprice + '</span>' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+        $('.itemlist').append('<div class="row">' + '<div class="col-md-6">' + productTitle + '</div>' +
+            '<div class="col-md-2">' + '<span class="price">' + productPrice + '</span>' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
             '<a role="menuitem" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a></span>' + '</div>');
 
-        var item = $('.itemlist').html();
-        localStorage.setItem("item", item);
-        var get_item = localStorage.getItem("item");
+        var itemQuantity = $(".glyphicon-trash").length;
+        localStorage.setItem("quantity", itemQuantity);
 
-        if (localStorage.getItem("price") === null || localStorage.getItem("price") == 0) {
-            $("#button_text").text(" Prekių krepšelis yra tuščias ");
-            $(".badge, .caret").hide();
-        } else {
-            $("#button_text").text(" Prekių yra ");
-            $('#itemsum').show().text('Viso už prekes: ' + products_sum + " €");
-            $(".badge, .caret").show();
-            $('.itemlist').html(get_item);
-        }
-        // prekiu vienetu apskaiciavimas
-        var item_amount = $(".glyphicon-trash").length;
-        localStorage.setItem("amount", item_amount);
-        var item_amount_result = localStorage.getItem("amount");
-        if ($(".glyphicon-trash").length <= 1) {
-            $('.badge').text(item_amount_result + " Vienetas");
-        } else {
-            $('.badge').text(item_amount_result + " Vienetai");
-        }
+        ItemList();
+        Basket();
+        itemsQuantity();
     });
 
     /**************************************** Remove products from basket **************************************************/
 
     $(document).on("click", ".glyphicon-trash", function () {
-        var confirm_action = confirm("Ar tikrai norite pašalinti šią prekę!");
-        if (confirm_action == true) {
+
+        var confirmAction = confirm("Ar tikrai norite pašalinti šią prekę!");
+        if (confirmAction == true) {
 
             $(this).closest(".row").remove();
-            var item = $('.itemlist').html();
-            localStorage.setItem("item", item);
-            var get_item = localStorage.getItem("item");
-            $('.itemlist').html(get_item);
 
-            var product_price = $(this).closest(".row").find(".price").text();
-            var product_price_result = parseInt(product_price);
-            sum -= product_price_result;
+            var itemQuantity = $(".glyphicon-trash").length;
+            localStorage.setItem("quantity", itemQuantity);
+
+            var productPrice = $(this).closest(".row").find(".price").text();
+            var productPriceResult = parseInt(productPrice);
+            sum -= productPriceResult;
 
             localStorage.setItem("price", sum);
-            var products_sum = localStorage.getItem("price");
+            var productsSum = localStorage.getItem("price");
 
-            if (localStorage.getItem("price") === null || localStorage.getItem("price") == 0) {
-                $("#button_text").text(" Prekių krepšelis yra tuščias ");
-                $(".badge, .caret, #itemsum").hide();
-            } else {
-                $("#button_text").text(" Prekių yra ");
-                $(".badge, .caret").show();
-                $('#itemsum').text('Viso už prekes: ' + products_sum + " €");
-            }
-        };
-
-        var item_amount = $(".glyphicon-trash").length;
-        localStorage.setItem("amount", item_amount);
-        var item_amount_result = localStorage.getItem("amount");
-        if ($(".glyphicon-trash").length <= 1) {
-            $('.badge').text(item_amount_result + " Vienetas");
-        } else {
-            $('.badge').text(item_amount_result + " Vienetai");
+            ItemList();
+            Basket();
+            itemsQuantity();
         }
     });
 
@@ -149,5 +104,42 @@ $(document).ready(function () {
         $('#add_picture').show('.list_picture');
         $('#description').hide('.list_description');
     });
+
+    /****************************************** Basket info *******************************************************/
+
+    function Basket() {
+        var getItem = localStorage.getItem("item");
+        var productsSum = localStorage.getItem("price");
+        if (localStorage.getItem("quantity") == 0 || localStorage.getItem("quantity") == null) {
+            $("#button_text").text(" Prekių krepšelis yra tuščias ");
+            $(".badge, .caret, #itemsum").hide();
+            $("#menu").prop("disabled", true);
+        } else {
+            $("#button_text").text(" Prekių krepšelyje yra ");
+            $(".badge, .caret").show();
+            $("#menu").prop("disabled", false);
+            $('#itemsum').show().text('Viso už prekes: ' + productsSum + " €");
+            $('.itemlist').html(getItem);
+        }
+    }
+
+/**************************************** Number of units on basket button *************************************/
+
+    function itemsQuantity() {
+        var itemQuantityResult = localStorage.getItem("quantity");
+        if (itemQuantityResult == 1) {
+            $('.badge').text(itemQuantityResult + " Vienetas");
+        } else {
+            $('.badge').text(itemQuantityResult + " Vienetai");
+        }
+    }
+
+/********************************** Set/Get Item list to/from localStorage ***************************************/
+
+    function ItemList() {
+        localStorage.setItem("item", $('.itemlist').html());
+        var getItem = localStorage.getItem("item");
+        $('.itemlist').html(getItem);
+    }
 });
 
